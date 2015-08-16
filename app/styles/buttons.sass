@@ -1,0 +1,14 @@
+.Button
+  background: $ctaBgColor
+  color: $ctaTextColor
+  padding: 0.5em 0.2em
+  font-size: 1.2em
+  border: 0
+  border-radius: 0.2em // FIXME: use compass for browser compatibility
+  cursor: pointer
+
+  border-bottom: 0.2em solid darken($ctaBgColor, 15%)
+
+  &:hover
+    background: darken($ctaBgColor, 5%)
+    border-bottom-color: 0.2em solid darken($ctaBgColor, 5%)
