@@ -7,7 +7,7 @@ module.exports =
   entry: [
     'webpack-dev-server/client?http://localhost:3000' # still needed?
     'webpack/hot/dev-server'
-    #'./app/scripts/main'
+    path.join __dirname, 'app/scripts/main'
   ]
   output:
     path: path.join __dirname, '.tmp/scripts'

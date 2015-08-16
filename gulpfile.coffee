@@ -2,7 +2,6 @@ gulp = require 'gulp'
 gutil = require 'gulp-util'
 $ = require('gulp-load-plugins')()
 path = require 'path'
-Immutable = require 'immutable'
 
 webpackConfig = require('./webpack.config')
 webpack = require('webpack')
@@ -23,29 +22,15 @@ gulp.task 'clean', require('del').bind(null, [
 ])
 
 gulp.task 'copy-assets', ->
-  gulp.src(['app/index.html', 'fixtures/article.json'])
+  gulp.src([
+      'app/index.html'
+      'fixtures/article.json'
+      'app/images/deepdream.jpg'
+    ])
     .pipe(gulp.dest('.tmp'))
 
 gulp.task 'webpack-dev-server', (done) ->
-  createWebPackDevServer './app/scripts', '.tmp/scripts', done
-  return
-
-# FIXME: This part is a bit messy as I tried creating a test server
-# that would allow for hot-reloading of the unit tests, will need to pick that
-# up again later.
-createWebPackDevServer = (entryPath, outputPath, done) ->
-  config = Immutable.fromJS(webpackConfig)
-  config = config.update 'entry', (entries) ->
-    entries = entries.push("#{entryPath}/main")
-    return entries
-
-  config = config.setIn ['output', 'path'], path.join(__dirname, outputPath)
-
-  config = config.updateIn ['resolve', 'root'], (roots) ->
-    roots = roots.push(path.join(__dirname, entryPath))
-    return roots
-
-  compiler = webpack(config.toJS())
+  compiler = webpack(webpackConfig)
 
   server = new WebpackDevServer compiler,
     contentBase: '.tmp'
@@ -82,7 +67,7 @@ gulp.task 'test', ->
       extensions: ['', '.js', '.cjsx', '.coffee']
     module:
       loaders: [
-        { test: /\.cjsx$/, loaders: ['coffee', 'cjsx']},
+        { test: /\.cjsx$/, loaders: ['coffee', 'cjsx'] },
         { test: /\.coffee$/, loader: 'coffee' }
       ]
 

@@ -3,4 +3,13 @@ React = require 'react/addons'
 
 module.exports = React.createClass
   render: ->
-    <div>...</div>
+    images = @props.images?.map (image) ->
+      <div 
+        className="ImageGallery-image"
+        key={image}
+        style={{backgroundImage: "url(#{image})"}}
+        />
+
+    <div className="ImageGallery">
+      {images}
+    </div>
