@@ -1,5 +1,7 @@
 path = require 'path'
 webpack = require 'webpack'
+ExtractTextPlugin = require 'extract-text-webpack-plugin'
+
 
 module.exports =
   cache: true
@@ -21,12 +23,18 @@ module.exports =
       path.join __dirname, 'app/styles'
     ]
     extensions: ['', '.js', '.cjsx', '.coffee']
+  devtool: 'source-map'
   module:
     loaders: [
       {
         test: /\.sass$/,
-        loader: 'style!css!sass?indentedSyntax&includePaths[]=' +
+        loader: ExtractTextPlugin.extract(
+          # activate source maps via loader query
+          'css?sourceMap!' +
+          'sass?sourceMap&indentedSyntax&includePaths[]=' +
           (path.resolve(__dirname, "./app/styles"))
+        )
+
       },
       { test: /\.cjsx$/, loaders: ['react-hot', 'coffee', 'cjsx']},
       { test: /\.coffee$/, loader: 'coffee' }
@@ -34,4 +42,6 @@ module.exports =
   plugins: [
     new webpack.HotModuleReplacementPlugin()
     new webpack.NoErrorsPlugin()
+    # extract inline css into separate 'styles.css'
+    new ExtractTextPlugin('styles.css')
   ]
