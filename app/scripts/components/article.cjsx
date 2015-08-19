@@ -7,6 +7,8 @@ ArticleExcerpt = require './excerpt'
 ArticleContent = require './content'
 
 
+require 'components/article.sass'
+
 articleStore = require 'stores/article'
 
 

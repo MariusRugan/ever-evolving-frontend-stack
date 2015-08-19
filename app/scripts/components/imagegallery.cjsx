@@ -1,5 +1,7 @@
 React = require 'react/addons'
 
+require 'components/imagegallery.sass'
+
 
 module.exports = React.createClass
   render: ->

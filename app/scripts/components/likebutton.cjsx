@@ -1,6 +1,7 @@
 React = require 'react/addons'
 ActionCreators = require 'actions/article'
 
+css = require 'components/likebutton.sass'
 
 module.exports = React.createClass
   _handleClick: ->
