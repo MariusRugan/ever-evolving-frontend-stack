@@ -8,6 +8,9 @@ module.exports = React.createClass
     <header className="Header">
       <h1>
         {@props.title}
-        <LikeButton liked={@props.liked} id={@props.id} />
+        <LikeButton 
+          dispatch={@props.dispatch} {# FIXME: meh }
+          liked={@props.liked} 
+          id={@props.id} />
       </h1>
     </header>

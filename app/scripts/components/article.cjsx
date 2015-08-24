@@ -21,13 +21,6 @@ require 'components/article.sass'
 ArticleDetail = React.createClass
 
   ###
-  # Sets the initial state before data is loaded
-  ###
-  #getInitialState: ->
-  #  state =
-  #    article: null
-
-  ###
   # Registers callback with the article store and requests initial data
   ###
   componentDidMount: ->
@@ -52,7 +45,8 @@ ArticleDetail = React.createClass
         <ArticleHeader
           id={context('id')}
           title={context('title')}
-          liked={context('liked')} 
+          liked={context('liked')}
+          dispatch={@props.dispatch} {# FIXME: meh }
           />
         <ArticleExcerpt excerpt={context('excerpt')} />
         <ImageGallery images={context('images')} />

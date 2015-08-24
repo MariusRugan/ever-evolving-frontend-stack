@@ -3,6 +3,7 @@ ActionCreators = require 'actions/article'
 
 css = require 'components/likebutton.sass'
 
+
 module.exports = React.createClass
   _handleClick: ->
     if @props.liked
@@ -12,7 +13,10 @@ module.exports = React.createClass
 
     # Sending ID so this component can be used in places where there are 
     # multiple articles
-    action.call(null, @props.id)
+    #
+    # @FIXME: use bindActionCreators or callback patterns? Seems
+    # boilerplatish
+    @props.dispatch action.call(null, @props.id)
 
 
   render: ->
