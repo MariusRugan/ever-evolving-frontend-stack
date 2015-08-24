@@ -13,3 +13,7 @@ The application is served at http://localhost:3000
 
 ## Running unit tests from command line
 `gulp test`
+
+## Flux Frameworks
+I aim to test out Flux inspired frameworks over time in separate branches.
+The Redux branch contains experiments with my current favorite framework.
