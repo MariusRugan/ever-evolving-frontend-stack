@@ -14,8 +14,8 @@ module.exports = React.createClass
     # Sending ID so this component can be used in places where there are 
     # multiple articles
     #
-    # @FIXME: use bindActionCreators or callback patterns? Seems
-    # boilerplatish
+    # @FIXME: use bindActionCreators or callback patterns? Passing dispatch
+    # gets tiresome, yet passing callbacks seems like it won't scale either.
     @props.dispatch action.call(null, @props.id)
 
 
