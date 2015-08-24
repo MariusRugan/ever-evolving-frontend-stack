@@ -12,7 +12,7 @@ module.exports = React.createClass
       action = ActionCreators.likeArticle
 
     # Sending ID so this component can be used in places where there are 
-    # multiple articles
+    # multiple articles.
     #
     # @FIXME: use bindActionCreators or callback patterns? Passing dispatch
     # gets tiresome, yet passing callbacks seems like it won't scale either.

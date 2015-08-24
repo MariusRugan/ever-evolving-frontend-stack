@@ -2,17 +2,14 @@ AppDispatcher = require 'dispatcher'
 Constants = require 'constants/main'
 
 
-requestArticleData = ->
-  type: Constants.LOAD_ARTICLE
-
-
 ###
 # Article actions
 ###
 module.exports =
   fetchArticleData: ->
     (dispatch) ->
-      dispatch(requestArticleData)
+      dispatch
+        type: Constants.LOAD_ARTICLE
 
       #TODO: move to API utility
       superagent = require('superagent')
