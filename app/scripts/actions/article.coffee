@@ -1,4 +1,3 @@
-AppDispatcher = require 'dispatcher'
 Constants = require 'constants/main'
 
 

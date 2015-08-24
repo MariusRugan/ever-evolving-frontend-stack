@@ -1,7 +1,7 @@
-React = require 'react/addons'
+React = require 'react'
 ActionCreators = require 'actions/article'
 
-css = require 'components/likebutton.sass'
+require 'components/likebutton.sass'
 
 
 module.exports = React.createClass

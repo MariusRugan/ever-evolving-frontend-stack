@@ -1,5 +1,4 @@
-React = require 'react/addons'
-ActionCreators = require 'actions/article'
+React = require 'react'
 LikeButton = require './likebutton'
 
 

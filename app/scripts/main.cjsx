@@ -3,7 +3,6 @@ Redux = require 'redux'
 thunkMiddleware = require 'redux-thunk'
 Provider = require('react-redux').Provider
 
-
 Article = require 'components/article'
 articleReducers = require 'reducers/article'
 require 'main.sass'

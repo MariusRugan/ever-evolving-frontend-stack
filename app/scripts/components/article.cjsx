@@ -1,4 +1,4 @@
-React = require 'react/addons'
+React = require 'react'
 ReactRedux = require 'react-redux'
 Constants = require 'constants/main'
 ActionCreators = require 'actions/article'
