@@ -31,9 +31,12 @@ describe 'Article Like Button', ->
     describe 'When not liked', ->
 
       beforeEach ->
+        @dispatcher = sinon.spy()
+
         props =
           liked: false
           id: @id
+          dispatch: @dispatcher
 
         renderLikeButton.call(@, props)
 
@@ -47,15 +50,20 @@ describe 'Article Like Button', ->
           TestUtils.Simulate.click @domElement
 
         it 'fires an likeArticle action', ->
-          expect(@ActionCreators.likeArticle).to.have.been.calledWith @id
+          # FIXME: the arguments to the action aren't asserted
+          expect(@dispatcher).to.have.been.calledWith \
+            @ActionCreators.likeArticle(@id)
 
 
     describe 'When liked', ->
 
       beforeEach ->
+        @dispatcher = sinon.spy()
+
         props =
           liked: true
           id: @id
+          dispatch: @dispatcher
 
         renderLikeButton.call(@, props)
 
@@ -69,4 +77,6 @@ describe 'Article Like Button', ->
           TestUtils.Simulate.click @domElement
 
         it 'fires an unlikeArticle action', ->
-          expect(@ActionCreators.unlikeArticle).to.have.been.calledWith @id
+          # FIXME: the arguments to the action aren't asserted
+          expect(@dispatcher).to.have.been.calledWith \
+            @ActionCreators.unlikeArticle(@id)

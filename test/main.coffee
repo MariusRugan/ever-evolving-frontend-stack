@@ -6,5 +6,5 @@ chai.use(sinonChai)
 
 
 # Require the components to test
-require 'spec/stores/article'
+require 'spec/reducers/article'
 require 'spec/components/likebutton'

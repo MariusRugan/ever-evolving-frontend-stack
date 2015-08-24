@@ -34,7 +34,6 @@ module.exports =
           'sass?sourceMap&indentedSyntax&includePaths[]=' +
           (path.resolve(__dirname, "./app/styles"))
         )
-
       },
       { test: /\.cjsx$/, loaders: ['react-hot', 'coffee', 'cjsx']},
       { test: /\.coffee$/, loader: 'coffee' }

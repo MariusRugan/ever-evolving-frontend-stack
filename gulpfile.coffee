@@ -48,6 +48,8 @@ gulp.task 'test', ->
     .pipe($.coffee({ bare: true }))
     .pipe(gulp.dest('.tmp/test'))
 
+  ExtractTextPlugin = require 'extract-text-webpack-plugin'
+
   # FIXME: Make DRY by re-using webpack config
   webpackTestConfig =
     entry: [
@@ -63,13 +65,27 @@ gulp.task 'test', ->
       root: [
         path.join __dirname, 'app/scripts'
         path.join __dirname, 'test'
+        path.join __dirname, 'app/styles'
       ]
       extensions: ['', '.js', '.cjsx', '.coffee']
     module:
       loaders: [
+        {
+          test: /\.sass$/,
+          loader: ExtractTextPlugin.extract(
+            # activate source maps via loader query
+            'css!' +
+            'sass?indentedSyntax&includePaths[]=' +
+            (path.resolve(__dirname, "./app/styles"))
+          )
+        },
         { test: /\.cjsx$/, loaders: ['coffee', 'cjsx'] },
         { test: /\.coffee$/, loader: 'coffee' }
       ]
+    plugins: [
+      # extract inline css into separate 'styles.css'
+      new ExtractTextPlugin('styles.css')
+    ]
 
 
   webpack(webpackTestConfig).run (err, stats) ->

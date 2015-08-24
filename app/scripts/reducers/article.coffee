@@ -6,7 +6,7 @@ articleReducers = (state = new Immutable.Map(), action) ->
   changeLikeStatus = (id, liked) ->
     state.setIn(['article', 'liked'], liked)
 
-  switch action.type
+  switch action?.type
     when Constants.ARTICLE_LOADED
       state = state.set('article', Immutable.Map(action.payload))
     when Constants.LIKE_ARTICLE
