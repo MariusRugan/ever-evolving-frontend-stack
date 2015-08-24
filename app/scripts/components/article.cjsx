@@ -1,4 +1,5 @@
 React = require 'react/addons'
+ReactRedux = require 'react-redux'
 Constants = require 'constants/main'
 ActionCreators = require 'actions/article'
 ArticleHeader = require './header'
@@ -9,7 +10,6 @@ ArticleContent = require './content'
 
 require 'components/article.sass'
 
-articleStore = require 'stores/article'
 
 
 ###
@@ -23,32 +23,15 @@ ArticleDetail = React.createClass
   ###
   # Sets the initial state before data is loaded
   ###
-  getInitialState: ->
-    state =
-      article: null
-
-  ###
-  # Retrieves data from relevant store(s)
-  ###
-  _getDataFromStore: ->
-    state =
-      article: articleStore.getCurrent()
+  #getInitialState: ->
+  #  state =
+  #    article: null
 
   ###
   # Registers callback with the article store and requests initial data
   ###
   componentDidMount: ->
-    articleStore.addChangeListener @_handleChange
-    ActionCreators.loadArticleData()
-
-
-  ###
-  # Handler called when the store is updated, updates the state which 
-  # kicks off re-rendering process of the relevant components if anything 
-  # changed
-  ###
-  _handleChange: ->
-    @setState @_getDataFromStore()
+    @props.dispatch(ActionCreators.fetchArticleData())
 
   #componentWillUnmount: ->
     # clean up...
@@ -58,7 +41,7 @@ ArticleDetail = React.createClass
   ###
   render: ->
     # shorthand for @state.article.get
-    context = @state.article?.get.bind(@state.article)
+    context = @props.article?.get.bind(@props.article)
 
     # Ideally the initial state would be rendered from the server of course
     unless context
@@ -78,4 +61,7 @@ ArticleDetail = React.createClass
 
 
 
-module.exports = ArticleDetail
+stateToProps = (state) ->
+  article: state.get('article')
+
+module.exports = ReactRedux.connect(stateToProps)(ArticleDetail)

@@ -1,10 +1,23 @@
 React = require 'react'
-Article = require 'components/article'
+Redux = require 'redux'
+thunkMiddleware = require 'redux-thunk'
+Provider = require('react-redux').Provider
 
-# For production and server side rendered pages it's better to serve CSS from 
-# the HEAD section of the page itself. However this allows hot-reloading during
-# development
+
+Article = require 'components/article'
+articleReducers = require 'reducers/article'
 require 'main.sass'
 
 
-React.render <Article/>, document.getElementById 'article'
+createStoreWithMiddleWare = Redux.applyMiddleware(
+  thunkMiddleware
+)(Redux.createStore)
+
+store = createStoreWithMiddleWare(articleReducers)
+
+React.render(
+  <Provider store={store}>
+    {() -> <Article/>}
+  </Provider>,
+  document.getElementById 'article'
+)
